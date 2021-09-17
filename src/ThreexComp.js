@@ -2,7 +2,6 @@ import React from 'react'
 import { ArToolkitProfile, ArToolkitSource, ArToolkitContext, ArMarkerControls, THREEx	} from 'arjs/three.js/build/ar-threex.js';
 import * as THREE from 'three';
 
-
 export default class ThreexComp extends React.Component {
 
     componentDidMount() {
@@ -88,12 +87,12 @@ export default class ThreexComp extends React.Component {
 
 	    var markerControls = new ArMarkerControls(arToolkitContext, markerGroup, {
 		    type : 'pattern',
-		    patternUrl : ArToolkitContext.baseURL + 'data/pattern-eye_80.patt',
+		    patternUrl : ArToolkitContext.baseURL + 'data/camera_para.dat',
 	    })
 
-	    //////////////////////////////////////////////////////////////////////////////////
-	    //		add an object in the scene
-	    //////////////////////////////////////////////////////////////////////////////////
+	    ////////////////////////////////////////////////////////////////////////////////
+	    		// add an object in the scene
+	    ////////////////////////////////////////////////////////////////////////////////
 
 	    var markerScene = new THREE.Scene()
 	    markerGroup.add(markerScene)
@@ -152,7 +151,8 @@ export default class ThreexComp extends React.Component {
         <div 
             style={{ width: "800px", height: "800px" }}
             ref={mount => { this.mount = mount}}
-        />
+				>
+				</div>
         )
     }       
 }
