@@ -1,7 +1,7 @@
 import React from 'react'
 import { ArToolkitProfile, ArToolkitSource, ArToolkitContext, ArMarkerControls, THREEx	} from 'arjs/three.js/build/ar-threex.js';
 import * as THREE from 'three';
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
+
 
 export default class ThreexComp extends React.Component {
 
@@ -97,29 +97,6 @@ export default class ThreexComp extends React.Component {
 
 	    var markerScene = new THREE.Scene()
 	    markerGroup.add(markerScene)
-
-			
-			
-			const gltfLoader = new GLTFLoader();
-      gltfLoader.load('https://threejsfundamentals.org/threejs/resources/models/cartoon_lowpoly_small_city_free_pack/scene.gltf', (gltf) => {
-      const root = gltf.scene;
-      scene.add(root);
-
-      // compute the box that contains all the stuff
-      // from root and below
-      const box = new THREE.Box3().setFromObject(root);
-
-      const boxSize = box.getSize(new THREE.Vector3()).length();
-      const boxCenter = box.getCenter(new THREE.Vector3());
-
-      // set the camera to frame the box
-      frameArea(boxSize * 0.5, boxSize, boxCenter, camera);
-
-      // update the Trackball controls to handle the new size
-      controls.maxDistance = boxSize * 10;
-      controls.target.copy(boxCenter);
-      controls.update();
-    });
 
 			// TEST//
 	    var mesh = new THREE.AxesHelper()
