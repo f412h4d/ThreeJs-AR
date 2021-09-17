@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArToolkitProfile, ArToolkitSource, ArToolkitContext, ArMarkerControls, THREEx	} from 'arjs/three.js/build/ar-threex.js';
+import { ArToolkitProfile, ArToolkitSource, ArToolkitContext, ArMarkerControls } from 'arjs/three.js/build/ar-threex.js';
 import * as THREE from 'three';
 
 export default class ThreexComp extends React.Component {
@@ -11,7 +11,6 @@ export default class ThreexComp extends React.Component {
 		    antialias	: true,
 		    alpha: true
 	    });
-
 	    renderer.setClearColor(new THREE.Color('lightgrey'), 0)
 	    // renderer.setPixelRatio( 2 );
 	    renderer.setSize( window.innerWidth, window.innerHeight );
@@ -46,8 +45,7 @@ export default class ThreexComp extends React.Component {
 	    window.addEventListener('resize', function(){
 		    onResize()
 	    })
-
-	    const onResize = () => {
+	    function onResize(){
 		    arToolkitSource.onResizeElement()
 		    arToolkitSource.copyElementSizeTo(renderer.domElement)
 		    if( arToolkitContext.arController !== null ){
@@ -87,7 +85,7 @@ export default class ThreexComp extends React.Component {
 
 	    var markerControls = new ArMarkerControls(arToolkitContext, markerGroup, {
 		    type : 'pattern',
-		    patternUrl : ArToolkitContext.baseURL + 'data/camera_para.dat',
+		    patternUrl : ArToolkitContext.baseURL + 'data/patt.hiro',
 	    })
 
 	    ////////////////////////////////////////////////////////////////////////////////
@@ -97,7 +95,6 @@ export default class ThreexComp extends React.Component {
 	    var markerScene = new THREE.Scene()
 	    markerGroup.add(markerScene)
 
-			// TEST//
 	    var mesh = new THREE.AxesHelper()
 	    markerScene.add(mesh)
 
@@ -121,7 +118,6 @@ export default class ThreexComp extends React.Component {
 	    onRenderFcts.push(function(delta){
 		    mesh.rotation.x += delta * Math.PI
 	    })
-      // TEST//
 
         //////////////////////////////////////////////////////////////////////////////////
 	    //		render the whole thing on the page
@@ -151,8 +147,7 @@ export default class ThreexComp extends React.Component {
         <div 
             style={{ width: "800px", height: "800px" }}
             ref={mount => { this.mount = mount}}
-				>
-				</div>
+        />
         )
     }       
 }
