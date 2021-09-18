@@ -1,6 +1,7 @@
 import React from 'react'
 import { ArToolkitProfile, ArToolkitSource, ArToolkitContext, ArMarkerControls } from 'arjs/three.js/build/ar-threex.js';
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 export default class ThreexComp extends React.Component {
 
@@ -12,8 +13,12 @@ export default class ThreexComp extends React.Component {
 		    alpha: true
 	    });
 	    renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-	    // renderer.setPixelRatio( 2 );
-	    renderer.setSize( window.innerWidth, window.innerHeight );
+	 
+			// Pixel Ratio
+			renderer.setPixelRatio( window.devicePixelRatio );
+	    
+			// Resolution
+			renderer.setSize( window.innerWidth, window.innerHeight );
 	    renderer.domElement.style.position = 'absolute'
 	    renderer.domElement.style.top = '0px'
 	    renderer.domElement.style.left = '0px'
@@ -30,7 +35,11 @@ export default class ThreexComp extends React.Component {
 	    //////////////////////////////////////////////////////////////////////////////////
 
 	    // Create a camera
+// then align the Three.js perspective with the CSS3D perspective:
+// camera = new THREE.PerspectiveCamera();
+
 	    var camera = new THREE.Camera();
+			camera.position.set( 0, 0, 4 );
 	    scene.add(camera);
         const artoolkitProfile = new ArToolkitProfile()
 	    artoolkitProfile.sourceWebcam()
@@ -97,6 +106,19 @@ export default class ThreexComp extends React.Component {
 
 	    var mesh = new THREE.AxesHelper()
 	    markerScene.add(mesh)
+
+// GLTFLoader
+const gltfLoader = new GLTFLoader();
+  const url = 'data/Blue.gltf';
+  gltfLoader.load(url, (gltf) => {
+    console.log(gltf);
+    const root = gltf.scene;
+		root.name = 'gltf-blue';
+    scene.add(root);
+    
+		var object = scene.getObjectByName( "gltf-blue" );
+		console.log(object.geometry)
+  });
 
 	    // add a torus knot (Test For Motion And Animation)
 	    var geometry	= new THREE.BoxGeometry(1,1,1);
